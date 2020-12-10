@@ -15,7 +15,8 @@ def vote(carId):
     if request.method == 'GET':
         db = get_db()
         if carId is not None:
-            car = db.execute(f'SELECT id FROM car WHERE id = {carId}').fetchone()
+            car = db.execute(f'SELECT * FROM car WHERE id = {carId}').fetchall()[0]
+
             if car is None:
                 raise Exception('Please provide a valid Car ID')
-            return car
+            return f"Model: {car['model']}"
