@@ -1,9 +1,18 @@
 import os
-
 from flask import Flask
+
+"""
+This File named as is; to tell Python that this directory '.flaskr/' should be treated as a package.  
+"""
 
 
 def create_app(test_config=None):
+    """
+    This function is known as the 'Application Factory'. Any configuration, registration, and other setup the
+    application needs will happen inside this function, then the application will be returned.
+    :param test_config:
+    :return: Flask Application
+    """
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_mapping(
@@ -31,6 +40,9 @@ def create_app(test_config=None):
 
     from . import db
     db.init_app(app)
+
+    from . import voting_form
+    app.register_blueprint(voting_form.bp)
 
     return app
 
