@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Voting
+{% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-sm-9">
+                <h1 class="display-5">Manufacture: {{ company['name'] }} </h1>
+                <h1 class="display-5">Model: {{ car['model'] }}</h1>
+            </div>
+            <div class="col-sm-3">
+                <img src={{company['logo_url']}} width=200px>
+            </div>
+        </div>
+
+    </div>
+    <br>
+
+    <form method="post" action="#">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="true" name="is_popular" required>
+          <label class="form-check-label" for="flexCheckIndeterminate">
+              I think <strong>{{ company['name'] }} {{ car['model'] }} </strong>is the most popular car in Jordan.
+          </label>
+        </div>
+        <div class="mb-3">
+          <label for="exampleFormControlInput1" class="form-label">
+              What is the most popular color seen on <strong>{{ company['name'] }} {{ car['model'] }} </strong>?</label>
+            <select class="form-select" name="color">
+              <option value="white">White</option>
+              <option value="black">Black</option>
+              <option value="red">Red</option>
+            </select>
+        </div>
+    <div>
+        <button class="btn btn-primary" type="submit" value="submit">Submit</button>
+    </div>
+    </form>
+{% endblock %}
+
+
