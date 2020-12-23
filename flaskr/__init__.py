@@ -31,5 +31,8 @@ def create_app():
     from . import vote
     app.register_blueprint(vote.bp)
 
+    from . import index
+    app.register_blueprint(index.bp)
+
     return app
 

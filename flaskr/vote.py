@@ -19,13 +19,17 @@ def vote(car_id):
         if car is None:
             raise Exception('Please provide a valid Car ID')
     if request.method == 'GET':
-        return render_template('vote.html', car=car, company=company)
+        return render_template('vote.html', car=car, company=company, pageUrl="vote")
     if request.method == 'POST':
         color_option_id = db.execute('SELECT * FROM option WHERE name = "color"').fetchone()['id']
         is_popular_option_id = db.execute(f'SELECT * FROM option WHERE name="is_popular"').fetchone()['id']
         color = '"'+request.form["color"]+'"'
-        popular = '"'+request.form["is_popular"]+'"'
+        if request.form.get("is_popular"):
+            popular = "true"
+        else:
+            popular = "false"
+        print(popular)
         db.execute(f'INSERT INTO vote(option_id, car_id, vote_value) VALUES({color_option_id}, {car_id}, {color})')
         db.execute(f'INSERT INTO vote(option_id, car_id, vote_value) VALUES({is_popular_option_id}, {car_id}, {popular})')
         db.commit()
-        return ("Thanks")
+        return redirect("/")

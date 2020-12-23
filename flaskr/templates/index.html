@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+    Home page
+{% endblock %}
+
+
+{% block body %}
+    <div class="mb-5">
+        <h1>Voting Results!</h1>
+    </div>
+    <div class="mb-5 row">
+        <div class="card col-sm-4 mr-3" style="width: 18rem;">
+          <img src={{ color['logo_url'] }} class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Most Voted Color</h5>
+            <p class="card-text">Color: {{ color['vote_value'] }}</p>
+            <p class="card-text">Votes: {{ color['count'] }}</p>
+            <p class="card-text">Car: {{ color['car']['model'] }}</p>
+
+          </div>
+        </div>
+        <div class="card col-sm-4" style="width: 18rem;">
+          <img src={{ most_popular['logo_url'] }} class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Most Popular Car</h5>
+            <p class="card-text">Votes: {{ most_popular['count'] }}</p>
+            <p class="card-text">Car: {{ most_popular['car']['model'] }}</p>
+
+          </div>
+        </div>
+    </div>
+<h1>Drop your vote on these cars:</h1>
+<div>
+    {% for car in cars %}
+        <li>
+            <a href="/vote/{{car.id}}">Vote for {{ car.model }}</a>
+        </li>
+    {% endfor %}
+</div>
+{% endblock %}
